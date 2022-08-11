@@ -1,4 +1,7 @@
-module SendGrid exposing (ApiKey, apiKey, textEmail, htmlEmail, addCc, addBcc, addAttachments, sendEmail, sendEmailTask, Email, Error(..), ErrorMessage, ErrorMessage403)
+module SendGrid exposing
+    ( ApiKey, apiKey, textEmail, htmlEmail, addCc, addBcc, addAttachments, sendEmail, sendEmailTask, Email, Error(..), ErrorMessage, ErrorMessage403
+    , decodeBadStatus, encodeSendEmail, sendGridApiUrl
+    )
 
 {-|
 
@@ -398,6 +401,7 @@ sendEmailTask (ApiKey apiKey_) email_ =
         }
 
 
+sendGridApiUrl : String
 sendGridApiUrl =
     "https://api.sendgrid.com/v3/mail/send"
 
