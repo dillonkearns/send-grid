@@ -7,6 +7,8 @@ module SendGrid exposing
 
 @docs ApiKey, apiKey, textEmail, htmlEmail, addCc, addBcc, addAttachments, sendEmail, sendEmailTask, Email, Error, ErrorMessage, ErrorMessage403
 
+@docs decodeBadStatus, encodeSendEmail, sendGridApiUrl
+
 -}
 
 import Base64
@@ -302,6 +304,7 @@ encodeNonemptyString nonemptyString =
     String.Nonempty.toString nonemptyString |> JE.string
 
 
+{-| -}
 encodeSendEmail : Email -> JE.Value
 encodeSendEmail (Email { content, subject, nameOfSender, emailAddressOfSender, to, cc, bcc, attachments }) =
     let
@@ -401,11 +404,13 @@ sendEmailTask (ApiKey apiKey_) email_ =
         }
 
 
+{-| -}
 sendGridApiUrl : String
 sendGridApiUrl =
     "https://api.sendgrid.com/v3/mail/send"
 
 
+{-| -}
 decodeBadStatus : Http.Metadata -> String -> Error
 decodeBadStatus metadata body =
     let
